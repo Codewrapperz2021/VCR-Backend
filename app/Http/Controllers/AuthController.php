@@ -19,14 +19,18 @@ class AuthController extends Controller
             $fields = $request->validate([
             'name' => 'required|string',
             'email' => 'required|string|unique:users,email',
-            'password' => 'required|string'
+            'password' => 'required|string',
+            'role' => 'string'
         ]);
 
         $user = User::create([
             'name' => $fields['name'],
             'email' => $fields['email'],
+            'role' => $fields['role'],
             'password' => bcrypt($fields['password'])
         ]);
+
+        
 
        //$this->token = $user->createToken('myapptoken')->plainTextToken;
 
