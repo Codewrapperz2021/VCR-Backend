@@ -28,7 +28,7 @@ Route::view('/studentlist','Student.studentlist');
 Route::view('/editstudent/{id}','Student.editstudent');
 
 
-
+    
 Route::get('/addsubject', function () {
     return view('Subject.addsubject');
 });
