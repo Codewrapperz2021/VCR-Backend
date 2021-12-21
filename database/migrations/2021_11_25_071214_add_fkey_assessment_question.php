@@ -18,6 +18,7 @@ class AddFkeyAssessmentQuestion extends Migration
             $table->unsignedBigInteger('a_id');
             $table->foreign('q_id')->references('id')->on('question')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('a_id')->references('id')->on('assessment')->onDelete('cascade')->onUpdate('cascade');
+            
         });
     }
 
