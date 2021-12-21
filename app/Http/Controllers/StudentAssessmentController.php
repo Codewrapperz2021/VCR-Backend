@@ -34,22 +34,34 @@ class StudentAssessmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'student_answer' => 'required',
-            'q_id' => 'required',
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'student_answer' => 'required',
+    //         'q_id' => 'required',
             
-        ]);
+    //     ]);
 
-        $student_assessment = new StudentAssessment();
-        $student_assessment->student_answer	= $request->student_answer	;
-        $student_assessment->q_id = $request->q_id;
+    //     $student_assessment = new StudentAssessment();
+    //     $student_assessment->student_answer	= $request->student_answer	;
+    //     $student_assessment->q_id = $request->q_id;
     
-        $student_assessment->save();
+    //     $student_assessment->save();
     
+    // }
+    public function multiplestore(Request $request)
+    {
+       if($request->isMethod('post')){
+           $answer = $request->input();
+           foreach ($answer as $key => $value) {
+            $student_assessment = new StudentAssessment();
+            $student_assessment->student_answer	= $value['student_answer'];
+            $student_assessment->q_id = $value['q_id'];
+            $student_assessment->s_id = $value['s_id'];
+            $student_assessment->save();
+           }
+       }
     }
-
     /**
      * Display the specified resource.
      *

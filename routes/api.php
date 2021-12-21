@@ -196,15 +196,15 @@ Route::get('/assessment/search/{first_name}',[AssessmentController::class,'searc
 
 
 //Student_Assessment
-Route::get('/student-assessment',[StudentAssessmentController::class,'index']);/*Show all Faculty*/
+Route::get('/student-assessment',[StudentAssessmentController::class,'index']);/*Show all Student-assessment*/
 
-Route::get('/student-assessment/{id}',[StudentAssessmentController::class,'show']);/*Fetching Single Faculty */
+Route::get('/student-assessment/{id}',[StudentAssessmentController::class,'show']);/*Fetching Single Student-assessment */
 
-Route::put('/student-assessment/{id}',[StudentAssessmentController::class,'update']);/*Updating Faculty Details*/
+Route::put('/student-assessment/{id}',[StudentAssessmentController::class,'update']);/*Updating Student-assessment Details*/
 
-Route::delete('/student-assessment/{id}',[StudentAssessmentController::class,'destroy']);/*Deleting Faculty*/
+Route::delete('/student-assessment/{id}',[StudentAssessmentController::class,'destroy']);/*Deleting Student-assessment*/
 
-Route::post('student-assessment',[StudentAssessmentController::class,'store']);/*Adding the new Faculty*/
+Route::post('student-assessment',[StudentAssessmentController::class,'multiplestore']);/*Adding the new/multiple Student-assessment*/
 
-Route::get('/student-assessment/search/{first_name}',[StudentAssessmentController::class,'search']);/*Search Faculty */
+Route::get('/student-assessment/search/{first_name}',[StudentAssessmentController::class,'search']);/*Search Student-assessment */
 

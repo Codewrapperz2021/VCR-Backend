@@ -54,7 +54,7 @@ class StudentController extends Controller
         $student->email = $request->email;
         $student->save();
     }
-
+    
     /**
      * Display the specified resource.
      *

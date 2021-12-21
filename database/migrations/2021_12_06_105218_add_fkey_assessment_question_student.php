@@ -15,9 +15,9 @@ class AddFkeyAssessmentQuestionStudent extends Migration
     {
         Schema::table('student_assessment', function (Blueprint $table) {
             $table->unsignedBigInteger('q_id');
-
+            $table->unsignedBigInteger('s_id');
             $table->foreign('q_id')->references('id')->on('question')->onDelete('cascade')->onUpdate('cascade');
-
+            $table->foreign('s_id')->references('id')->on('students')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
