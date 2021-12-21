@@ -20,23 +20,28 @@ class AuthController extends Controller
             'name' => 'required|string',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string',
-            'role' => 'string'
+            'role' => 'string',
+            'profileimage' => ''
         ]);
+
+        $name=$request->name;
+        $image=$request->file("file");
+        $imageName = time().'.'.$image->extension();
+        $image->move(public_path('images'),$imageName);
 
         $user = User::create([
             'name' => $fields['name'],
             'email' => $fields['email'],
             'role' => $fields['role'],
-            'password' => bcrypt($fields['password'])
+            'password' => bcrypt($fields['password']),
+            'profileimage'=> $fields['profileimage'] = $imageName            
         ]);
 
         
 
-       //$this->token = $user->createToken('myapptoken')->plainTextToken;
 
         $response = [
             'user' => $user
-            // 'token' => $token
             
         ];
 
