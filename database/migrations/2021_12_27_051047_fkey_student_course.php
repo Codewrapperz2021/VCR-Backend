@@ -16,9 +16,9 @@ class FkeyStudentCourse extends Migration
         Schema::table('students', function (Blueprint $table) {
             $table->unsignedBigInteger('course_id');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade')->onUpdate('cascade');
-        });
+        }); 
     }
-
+//sdfgh
     /**
      * Reverse the migrations.
      *
