@@ -3,6 +3,7 @@
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NewPasswordController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LectureController;
@@ -26,19 +27,40 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum','verified')->get('/user', function (Request $request) {
     return $request->user();
+    Route::get('login/google',[AuthController::class,'redirectToGoogle']);
+Route::get('login/google/callback',[AuthController::class,'handleGoogleCallback']);
 });
 
 Route::post('/login',[AuthController::class,'login']);/*login the user*/
 
+// // Gooogle Login
+// Route::get('login/google',[AuthController::class,'redirectToGoogle']);
+// Route::get('login/google/callback',[AuthController::class,'handleGoogleCallback']);
+
+//Facebook Login
+Route::get('login/facebook',[AuthController::class,'redirectToFacebook']);
+Route::get('login/facebook/callback',[AuthController::class,'handleFacebookCallback']);
+
+//Github Login
+Route::get('login/github',[AuthController::class,'redirectToGithub']);
+Route::get('login/github/callback',[AuthController::class,'handleGithubCallback']);
+
 Route::group(['middleware'=>['auth:sanctum']], function() {
-Route::post('/logout',[AuthController::class,'logout']);/*logout the user*/
 
 
 });
+Route::post('/logout',[AuthController::class,'logout'])->middleware('auth:sanctum');/*logout the user*/
+
 
 Route::get('get-profile',[AuthController::class,'getProfile']);
+Route::post('forgot-password',[NewPasswordController::class,'forgotPassword']);
+Route::post('reset-password',[NewPasswordController::class,'reset']);
+
+Route::post('email/verification-notification',[AuthController::class,'sendVerificationEmail'])->middleware('auth:sanctum');
+Route::get('verify-email/{id}/{hash}', [AuthController::class, 'verify'])->name('verification.verify')->middleware('auth:sanctum');
+
 
 
 
@@ -48,9 +70,9 @@ Route::post('/register',[AuthController::class,'register']);/*Registering the ne
 
 
 // Student Module
-Route::get('/student',[StudentController::class,'index']);/*Show all students*/
+Route::get('/student',[StudentController::class,'index'])->middleware('auth:sanctum');
 
-Route::post('/student',[StudentController::class,'store']);/*Getting the new student*/
+Route::post('/student',[StudentController::class,'store'])->middleware('auth:sanctum');/*Getting the new student*/
 
 Route::get('/student/{id}',[StudentController::class,'show']);/*Fetching Single Student*/
 
