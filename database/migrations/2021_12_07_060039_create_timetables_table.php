@@ -18,6 +18,7 @@ class CreateTimetablesTable extends Migration
             $table->string('course_name');
             $table->string('subject_name');
             $table->string('faculty_name');
+            $table->string('time_id');
             $table->timestamps();
         });
     }

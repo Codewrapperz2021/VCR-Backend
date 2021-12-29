@@ -37,9 +37,6 @@ class AuthController extends Controller
             'profileimage'=> $fields['profileimage'] = $imageName            
         ]);
 
-        
-
-
         $response = [
             'user' => $user
             
@@ -100,6 +97,5 @@ class AuthController extends Controller
     
             }
     }
-
 
 }

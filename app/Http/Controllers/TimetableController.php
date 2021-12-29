@@ -14,14 +14,13 @@ class TimetableController extends Controller
      */
     public function index()
     {   
-
         $data = Timetable::all();
-    
         $users = DB::table('timetables')
             ->join('courses', 'timetables.course_name', '=', 'courses.id')
             ->join('subjects', 'timetables.subject_name', '=', 'subjects.id')
             ->join('faculties', 'timetables.faculty_name', '=', 'faculties.id')
-            ->select('timetables.*','courses.*', 'subjects.*','faculties.*')
+            ->join('lectures', 'timetables.time_id', '=', 'lectures.id')
+            ->select('timetables.*','courses.*', 'subjects.*','faculties.*','lectures.*')
             ->get();
             return $users;
     }
@@ -44,15 +43,18 @@ class TimetableController extends Controller
      */
     public function store(Request $request)
     {
-        
-
+        if($request->isMethod('post')){
+         $timetable = $request->input();
+        foreach ($timetable as $key => $value) {
         $Timetable = new Timetable();
-        $Timetable->course_name = $request->course_name;
-        $Timetable->subject_name = $request->subject_name;
-        $Timetable->faculty_name = $request->faculty_name;
+        $Timetable->course_name = $value['course_name'];
+        $Timetable->subject_name = $value['subject_name'];
+        $Timetable->faculty_name = $value['faculty_name'];
+        $Timetable->time_id = $value['time_id'];
         $Timetable->save();
+        }
+       }
     }
-
     /**
      * Display the specified resource.
      *
@@ -89,6 +91,7 @@ class TimetableController extends Controller
         $Timetable->course_name = $request->course_name;
         $Timetable->subject_name = $request->subject_name;
         $Timetable->faculty_name = $request->faculty_name;
+        $Timetable->time_id = $request->time_id;
         $Timetable->save();
         return $Timetable;
     }

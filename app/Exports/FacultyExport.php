@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Exports;
-
 use App\Models\Faculty;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
