@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use DB;
 
 class SubjectController extends Controller
 {
@@ -16,7 +17,11 @@ class SubjectController extends Controller
     {   
 
         $data = Subject::all();
-        return $data;
+        $users = DB::table('subjects')
+            ->join('courses', 'subjects.course_id', '=', 'courses.id')
+            ->select('subjects.*','courses.cname')
+            ->get();
+            return $users;
         
     }
 

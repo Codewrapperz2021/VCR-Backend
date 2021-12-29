@@ -6,6 +6,7 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Exports\StudentExport;
 use Excel;
+use DB;
 
 class StudentController extends Controller
 {
@@ -15,9 +16,16 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return Student::all();
+    {   
+
+        $data = Student::all();
+        $users = DB::table('students')
+            ->join('courses', 'students.course_id', '=', 'courses.id')
+            ->select('students.*','courses.cname')
+            ->get();
+            return $users;
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -47,6 +55,7 @@ class StudentController extends Controller
 
 
         $student = new Student();
+        $student->course_id = $request->course_id;
         $student->first_name = $request->first_name;
         $student->last_name = $request->last_name;
         $student->address = $request->address;
@@ -88,6 +97,7 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
         $student = Student::findOrFail($id);
+        $student->course_id = $request->course_id;
         $student->first_name = $request->first_name;
         $student->last_name = $request->last_name;
         $student->address = $request->address;

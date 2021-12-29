@@ -55,13 +55,13 @@ class QuestionController extends Controller
 
         $question->save();
     }
-    public function innerJoin(){
-        $result = DB::table('question')
-        ->join('student_assessment','question.id','=','student_assessment.q_id')
-        ->select('student_assessment.q_id as QUESTION.','question.correctanswer as CORRECTANSWER','student_assessment.student_answer as USERANSWER')
-        ->get();
-        return $result;
-    }
+    // public function innerJoin(){
+    //     $result = DB::table('question')
+    //     ->join('student_assessment','question.id','=','student_assessment.q_id')
+    //     ->select('student_assessment.q_id as QUESTION','question.correctanswer as CORRECTANSWER','student_assessment.student_answer as USERANSWER')
+    //     ->get();
+    //     return $result;
+    // }
 
 
 

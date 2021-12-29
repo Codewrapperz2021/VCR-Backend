@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\StudentAssessmentController;
 
 
 
@@ -28,7 +29,7 @@ Route::view('/studentlist','Student.studentlist');
 Route::view('/editstudent/{id}','Student.editstudent');
 
 
-    
+
 Route::get('/addsubject', function () {
     return view('Subject.addsubject');
 });
@@ -58,4 +59,5 @@ Route::get('/addfaculty', function () {
 Route::view('/facultylist','Teacher.facultylist');
 Route::view('/editfaculty/{id}','Teacher.editfaculty');
 
-Route::get('/innerjoin',[QuestionController::class,'innerJoin'])->name('question.innerjoin');
+//Route::get('/innerjoin',[QuestionController::class,'innerJoin'])->name('question.innerjoin');
+Route::get('/innerjoinstudent',[StudentAssessmentController ::class,'innerJoinstudent'])->name('student_assessment.innerJoinstudent'); 

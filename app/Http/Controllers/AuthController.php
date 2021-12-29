@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Exception;
+use DB;
 
 class AuthController extends Controller
 {
@@ -29,8 +30,7 @@ class AuthController extends Controller
             'role' => $fields['role'],
             'password' => bcrypt($fields['password'])
         ]);
-
-        
+      
 
        //$this->token = $user->createToken('myapptoken')->plainTextToken;
 
@@ -54,6 +54,8 @@ class AuthController extends Controller
             'message' => 'Logged Out'
         ];
     }
+    
+
 
     public function login(Request $request) {
     
@@ -95,6 +97,15 @@ class AuthController extends Controller
     
             }
     }
+    public function index()
+    {   
 
+        $data = User::all();
+        $users = DB::table('users')
+            ->join('students', 'students.course_id', '=', 'courses.id')
+            ->select('students.*','courses.cname')
+            ->get();
+            return $users;
+    }
 
 }

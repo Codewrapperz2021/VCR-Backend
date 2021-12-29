@@ -16,7 +16,6 @@ class TimetableController extends Controller
     {   
 
         $data = Timetable::all();
-    
         $users = DB::table('timetables')
             ->join('courses', 'timetables.course_name', '=', 'courses.id')
             ->join('subjects', 'timetables.subject_name', '=', 'subjects.id')

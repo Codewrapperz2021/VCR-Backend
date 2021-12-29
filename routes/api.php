@@ -204,7 +204,7 @@ Route::put('/student-assessment/{id}',[StudentAssessmentController::class,'updat
 
 Route::delete('/student-assessment/{id}',[StudentAssessmentController::class,'destroy']);/*Deleting Faculty*/
 
-Route::post('student-assessment',[StudentAssessmentController::class,'store']);/*Adding the new Faculty*/
+Route::post('/student-assessment',[StudentAssessmentController::class,'multiplestore']);/*Adding the new Faculty*/
 
 Route::get('/student-assessment/search/{first_name}',[StudentAssessmentController::class,'search']);/*Search Faculty */
 
