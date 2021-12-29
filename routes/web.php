@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\StudentAssessmentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::view('/facultylist','Teacher.facultylist');
+Route::view('/editfaculty/{id}','Teacher.editfaculty');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

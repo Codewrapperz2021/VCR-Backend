@@ -44,9 +44,6 @@ class AuthController extends Controller
             'profileimage'=> $fields['profileimage'] = $imageName            
         ]);
 
-        
-
-
         $response = [
             'user' => $user
             
@@ -180,6 +177,8 @@ class AuthController extends Controller
         return Socialite::driver('github')->redirect();
     }
 
+
+
     //Github Callback
     public function handleGithubCallback()
     {
@@ -204,9 +203,5 @@ class AuthController extends Controller
         }
         Auth::login($user);
     }
-
-
-
-
 
 }

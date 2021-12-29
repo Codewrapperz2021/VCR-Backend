@@ -231,3 +231,5 @@ Route::post('student-assessment',[StudentAssessmentController::class,'multiplest
 
 Route::get('/student-assessment/search/{first_name}',[StudentAssessmentController::class,'search']);/*Search Student-assessment */
 
+
+

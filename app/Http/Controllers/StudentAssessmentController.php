@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\StudentAssessment;
 use Illuminate\Http\Request;
-
+use DB;
+use PDF;
 
 class StudentAssessmentController extends Controller
 {
@@ -15,7 +16,13 @@ class StudentAssessmentController extends Controller
      */
     public function index()
     {
-        return StudentAssessment::all();
+        $data= StudentAssessment::all();
+            $result = DB::table('student_assessment')
+                ->join('question', 'student_assessment.q_id', '=', 'question.id')
+                ->join('users', 'student_assessment.s_id', '=', 'users.id')
+                ->select('users.name','question.question','question.correctanswer','student_assessment.*')
+                ->get();
+            return $result;
     }
 
     /**
@@ -84,7 +91,7 @@ class StudentAssessmentController extends Controller
     {
         //
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -107,4 +114,5 @@ class StudentAssessmentController extends Controller
     {
         //
     }
+    
 }
