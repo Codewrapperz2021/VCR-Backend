@@ -6,6 +6,7 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Exports\StudentExport;
 use Excel;
+use DB;     
 
 class StudentController extends Controller
 {
