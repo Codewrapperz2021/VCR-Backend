@@ -62,7 +62,7 @@ class StudentController extends Controller
         $student->phone = $request->phone;
         $student->email = $request->email;
         $student->roll = $request->roll;
-        $student->collage = $request->collage;
+        $student->college = $request->college;
         $student->save();
     }
     
@@ -106,7 +106,7 @@ class StudentController extends Controller
         $student->phone = $request->phone;
         $student->email = $request->email;
         $student->roll = $request->roll;
-        $student->collage = $request->collage;
+        $student->college = $request->college;
         $student->save();
     }
 

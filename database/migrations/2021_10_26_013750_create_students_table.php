@@ -21,7 +21,7 @@ class CreateStudentsTable extends Migration
             $table->string('phone');
             $table->string('email');
             $table->string('roll');
-            $table->string('collage');
+            $table->string('college');
             $table->timestamps();
         });
     }
