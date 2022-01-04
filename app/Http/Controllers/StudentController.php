@@ -50,7 +50,7 @@ class StudentController extends Controller
             'phone' => 'required',
             'email' => 'required',
             'roll' => 'required',
-            'collage' => 'required',
+            'college' => 'required',
         ]);
 
 
