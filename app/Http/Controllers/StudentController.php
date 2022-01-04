@@ -49,6 +49,8 @@ class StudentController extends Controller
             'address' => 'required',
             'phone' => 'required',
             'email' => 'required',
+            'roll' => 'required',
+            'collage' => 'required',
         ]);
 
 
@@ -59,6 +61,8 @@ class StudentController extends Controller
         $student->address = $request->address;
         $student->phone = $request->phone;
         $student->email = $request->email;
+        $student->roll = $request->roll;
+        $student->collage = $request->collage;
         $student->save();
     }
     
@@ -101,6 +105,8 @@ class StudentController extends Controller
         $student->address = $request->address;
         $student->phone = $request->phone;
         $student->email = $request->email;
+        $student->roll = $request->roll;
+        $student->collage = $request->collage;
         $student->save();
     }
 

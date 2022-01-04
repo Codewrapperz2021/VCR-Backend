@@ -13,7 +13,11 @@ use App\Http\Controllers\CorrectanswerController;
 use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\StudentAssessmentController;
 use App\Http\Controllers\TimetableController;
+
+use App\Http\Controllers\FeedbackController;
+
 use App\Http\Controllers\ProfileController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -236,7 +240,9 @@ Route::post('student-assessment',[StudentAssessmentController::class,'multiplest
 
 Route::get('/student-assessment/search/{first_name}',[StudentAssessmentController::class,'search']);/*Search Student-assessment */
 
+//Feedback
 
+Route::post('student-feedback',[FeedbackController::class,'store']);/*Adding assesment feedback*/
 
 
 //Profile Controller
