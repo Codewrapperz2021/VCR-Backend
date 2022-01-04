@@ -13,6 +13,7 @@ use App\Http\Controllers\CorrectanswerController;
 use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\StudentAssessmentController;
 use App\Http\Controllers\TimetableController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,25 +28,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum','verified')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-    Route::get('login/google',[AuthController::class,'redirectToGoogle']);
-Route::get('login/google/callback',[AuthController::class,'handleGoogleCallback']);
+   
 });
+Route::get('login/google',[AuthController::class,'redirectToGoogle']);
+Route::get('login/google/callback',[AuthController::class,'handleGoogleCallback']);
 
 Route::post('/login',[AuthController::class,'login']);/*login the user*/
+
+Route::post('/googlelogin',[AuthController::class,'registerOrLoginGoogle']);/*login the user*/
+
 
 // // Gooogle Login
 // Route::get('login/google',[AuthController::class,'redirectToGoogle']);
 // Route::get('login/google/callback',[AuthController::class,'handleGoogleCallback']);
 
-//Facebook Login
-Route::get('login/facebook',[AuthController::class,'redirectToFacebook']);
-Route::get('login/facebook/callback',[AuthController::class,'handleFacebookCallback']);
+// //Facebook Login
+// Route::get('login/facebook',[AuthController::class,'redirectToFacebook']);
+// Route::get('login/facebook/callback',[AuthController::class,'handleFacebookCallback']);
 
-//Github Login
-Route::get('login/github',[AuthController::class,'redirectToGithub']);
-Route::get('login/github/callback',[AuthController::class,'handleGithubCallback']);
+// //Github Login
+// Route::get('login/github',[AuthController::class,'redirectToGithub']);
+// Route::get('login/github/callback',[AuthController::class,'handleGithubCallback']);
 
 Route::group(['middleware'=>['auth:sanctum']], function() {
 
@@ -233,3 +238,9 @@ Route::get('/student-assessment/search/{first_name}',[StudentAssessmentControlle
 
 
 
+
+//Profile Controller
+
+Route::post('/profile/change-password',[ProfileController::class,'change_password'])->middleware('auth:sanctum');
+
+Route::post('/profile/profileimage-update',[ProfileController::class,'update_profile'])->middleware('auth:sanctum');

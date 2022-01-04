@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Exception;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -32,7 +33,7 @@ class AuthController extends Controller
         ]);
 
         $name=$request->name;
-        $image=$request->file("file");
+        $image=$request->file("profileimage");
         $imageName = time().'.'.$image->extension();
         $image->move(public_path('images'),$imageName);
 
@@ -53,6 +54,25 @@ class AuthController extends Controller
          
         }
         
+    }
+
+    public function registerOrLoginGoogle(Request $data)
+    {
+        // $user = User::where('email', '=' , $data->email)->first();
+        // if($user) {
+            $user = new User();
+            $user->name = $data->name;
+            $user->email = $data->email;
+            $user->provider_id = $data->provider_id;
+            $user->profileimage = $data->profileimage;
+            $user->save();
+
+        
+        return response()->json(
+            [
+                'message' => 'asdfgb'
+            ]
+        );        
     }
 
 
@@ -140,68 +160,68 @@ class AuthController extends Controller
     }
 
 
-    //Google Login
-    public function redirectToGoogle()
-    {
-        return Socialite::driver('google')->redirect();
-    }
+    // //Google Login
+    // public function redirectToGoogle()
+    // {
+    //     return Socialite::driver('google')->redirect();
+    // }
 
-    //Google Callback
-    public function handleGoogleCallback()
-    {
-        $user = Socialite::driver('google')->user();
+    // //Google Callback
+    // public function handleGoogleCallback()
+    // {
+    //     $user = Socialite::driver('google')->user();
 
-        $this->_registerOrLoginUser();
-        return redirect()->route('localhost:3000/studentdashboard');
-    }
+    //     $this->_registerOrLoginUser();
+    //     return redirect()->route('localhost:3000/studentdashboard');
+    // }
 
-    //Facebook Login
-    public function redirectToFacebook()
-    {
-        return Socialite::driver('facebook')->redirect();
-    }
+    // //Facebook Login
+    // public function redirectToFacebook()
+    // {
+    //     return Socialite::driver('facebook')->redirect();
+    // }
 
-    //Facebook Callback
-    public function handleFacebookCallback()
-    {
-        $user = Socialite::driver('facebook')->user();
+    // //Facebook Callback
+    // public function handleFacebookCallback()
+    // {
+    //     $user = Socialite::driver('facebook')->user();
 
-        $this->_registerOrLoginUser();
-        return redirect()->route('localhost:3000/studentdashboard');
-    }
+    //     $this->_registerOrLoginUser();
+    //     return redirect()->route('localhost:3000/studentdashboard');
+    // }
 
     
-    //Github Login
-    public function redirectToGithub()
-    {
-        return Socialite::driver('github')->redirect();
-    }
+    // //Github Login
+    // public function redirectToGithub()
+    // {
+    //     return Socialite::driver('github')->redirect();
+    // }
 
 
 
-    //Github Callback
-    public function handleGithubCallback()
-    {
-        $user = Socialite::driver('github')->user();
+    // //Github Callback
+    // public function handleGithubCallback()
+    // {
+    //     $user = Socialite::driver('github')->user();
 
-        $this->_registerOrLoginUser();
-        return redirect()->route('localhost:3000/studentdashboard');
-    }
+    //     $this->_registerOrLoginUser();
+    //     return redirect()->route('localhost:3000/studentdashboard');
+    // }
 
 
-    protected function _registerOrLoginUser($data)
-    {
-        $user = User::where('email', '=' , $data->email)->first();
-        if($user) {
-            $user = new User();
-            $user->name = $data->name;
-            $user->email = $data->email;
-            $user->provider_id = $data->id;
-            $user->profileimage = $data->avatar;
-            $user->save();
+    // protected function _registerOrLoginUser($data)
+    // {
+    //     $user = User::where('email', '=' , $data->email)->first();
+    //     if($user) {
+    //         $user = new User();
+    //         $user->name = $data->name;
+    //         $user->email = $data->email;
+    //         $user->provider_id = $data->id;
+    //         $user->profileimage = $data->avatar;
+    //         $user->save();
 
-        }
-        Auth::login($user);
-    }
+    //     }
+    //     Auth::login($user);
+    // }
 
 }
