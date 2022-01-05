@@ -42,7 +42,7 @@ class ProfileController extends Controller
     public function update_profile(Request $request){
         $validator =  Validator::make($request->all(), [
             'name'=>'required|min:2|max:100',
-            'profileimage'=>''
+            'profileimage'=>'required|image|mimes:jpg,png'
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -53,23 +53,21 @@ class ProfileController extends Controller
 
         $user=$request->user();
         
-            if($request->hasFile('file')){
+            if($request->hasFile('profileimage')){
                 if($user->profileimage){
-                $old_path=public_path().'/images'.$user->profileimage;
+                $old_path=public_path().'/images/profilephoto'.$user->profileimage;
                 if(File::exists($old_path)){
                     File::delete($old_path);
                 }
             }
-            $name=$request->name;
-            $image=$request->file("profileimage");
-            $imageName = time().'.'.$image->extension();
-            $image->move(public_path('images'),$imageName);
+            $image_name='profile-image-'.time().'.'.$request->profileimage->extension();
+            $request->profileimage->move(public_path('/images/profilephoto'),$image_name);
         }else{
-            $imageName=$user->profileimage;
+            $image_name=$user->profileimage;
         }
         $user->update([
             'name'=>$request->name,
-            'profileimage'=>$imageName
+            'profileimage'=>$image_name
         ]);
 
             return response()->json([

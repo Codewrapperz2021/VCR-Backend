@@ -13,11 +13,9 @@ use App\Http\Controllers\CorrectanswerController;
 use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\StudentAssessmentController;
 use App\Http\Controllers\TimetableController;
-
 use App\Http\Controllers\FeedbackController;
-
 use App\Http\Controllers\ProfileController;
-
+use App\Http\Controllers\MaterialController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -250,3 +248,11 @@ Route::post('student-feedback',[FeedbackController::class,'store']);/*Adding ass
 Route::post('/profile/change-password',[ProfileController::class,'change_password'])->middleware('auth:sanctum');
 
 Route::post('/profile/profileimage-update',[ProfileController::class,'update_profile'])->middleware('auth:sanctum');
+
+
+//material 
+Route::post('/material',[MaterialController::class,'store']);/*Adding the new material*/
+
+Route::get('/material',[MaterialController::class,'index']);/*get material*/
+
+Route::delete('/material/{id}',[MaterialController::class,'destroy']);/*Deleting material*/
