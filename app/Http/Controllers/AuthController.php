@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
-
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Validation\Rules\Password;
+use  Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -21,37 +21,39 @@ class AuthController extends Controller
 {
     public function register(Request $request) {
         {
-            $request->validate([
-    
+                $validator = Validator::make($request->all(), [
+                    'name' => 'required|string|min:2|max:100',
+                    'email' => 'required|string|email|unique:users,email',
+                    'password' => 'required|string|min:4|max:100',
+                    'confirm_password' => 'required|same:password',
+                    'role' => 'string',
+                    'profileimage' => 'required|image|mimes:jpg,png'
             ]);
-            $fields = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string|email|unique:users,email',
-            'password' => 'required|string',
-            'role' => 'string',
-            'profileimage' => ''
-        ]);
 
-        $name=$request->name;
-        $image=$request->file("file");
-        $imageName = time().'.'.$image->extension();
-        $image->move(public_path('images'),$imageName);
+            if ($validator->fails()) {
+                return response()->json([
+                    'message'=>'Validations fails',
+                    'errors'=>$validator->errors()
+                ],422);
+            }
+
+        $image_name='profile-image-'.time().'.'.$request->profileimage->extension();
+        $request->profileimage->move(public_path('/images/profilephoto'),$image_name);
 
         $user = User::create([
-            'name' => $fields['name'],
-            'email' => $fields['email'],
-            'role' => $fields['role'],
-            'password' => bcrypt($fields['password']),
-            'profileimage'=> $fields['profileimage'] = $imageName            
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role,
+            'password' => Hash::make($request->password),
+            'profileimage'=> $image_name          
         ]);
 
-        $response = [
-            'user' => $user
+        return response()->json([
+            'message' => 'Registration Successful',
+            'data' => $user
             
-        ];
+        ],200);
 
-        return response($response, 200);
-         
         }
         
     }
@@ -103,32 +105,6 @@ class AuthController extends Controller
                 ]
             ]
                 );
-    
-        // $fields = $request->validate([
-        //     'email' => 'required|string',
-        //     'password' => 'required|string'
-        // ]);
-
-        // // Check Email
-        
-        // $user = User::where('email',$fields['email'])->first();
-
-        // // Check Password
-        // if(!$user || !Hash::check($fields['password'], $user->password)) {
-        //     return response([
-        //         'message' => 'Bad Credentials'
-        //     ],401);
-        // }
-
-        // $token = $user->createToken('myapptoken')->plainTextToken;
-        
-        // $this->response= [
-        //     'user' => $user,
-        //     'token' => $token,
-            
-        // ];
-
-        // return response($this->response, 200);
     }
 
     public function sendVerificationEmail(Request $request)
