@@ -16,6 +16,7 @@ use App\Http\Controllers\TimetableController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\TodoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,8 @@ Route::get('login/google',[AuthController::class,'redirectToGoogle']);
 Route::get('login/google/callback',[AuthController::class,'handleGoogleCallback']);
 
 Route::post('/login',[AuthController::class,'login']);/*login the user*/
+Route::get('/userlist',[AuthController::class,'index']);/*login the user*/
+
 
 Route::post('/googlelogin',[AuthController::class,'registerOrLoginGoogle']);/*login the user*/
 
@@ -77,7 +80,7 @@ Route::post('/register',[AuthController::class,'register']);/*Registering the ne
 
 
 // Student Module
-Route::get('/student',[StudentController::class,'index']);
+Route::get('/student',[StudentController::class,'index'])->middleware('auth:sanctum');
 
 Route::post('/student',[StudentController::class,'store']);/*Getting the new student*/
 
@@ -256,3 +259,16 @@ Route::post('/material',[MaterialController::class,'store']);/*Adding the new ma
 Route::get('/material',[MaterialController::class,'index']);/*get material*/
 
 Route::delete('/material/{id}',[MaterialController::class,'destroy']);/*Deleting material*/
+
+
+
+
+//todo list
+Route::get('/todo',[TodoController::class,'index']);/*Show all todo*/
+
+Route::post('/todo',[TodoController::class,'store']);/*Getting the new todo*/
+
+Route::put('/todo/{id}',[TodoController::class,'update']);/*Updating course todo*/
+
+Route::delete('/todo/{id}',[TodoController::class,'destroy']);/*Deleting todo*/
+
