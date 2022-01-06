@@ -20,7 +20,7 @@ class StudentAssessmentController extends Controller
             $result = DB::table('student_assessment')
                 ->join('question', 'student_assessment.q_id', '=', 'question.id')
                 ->join('users', 'student_assessment.s_id', '=', 'users.id')
-                ->select('users.name','question.question','question.correctanswer','student_assessment.*')
+                ->select('users.*','question.question','question.correctanswer','student_assessment.*')
                 ->get();
             return $result;
     }

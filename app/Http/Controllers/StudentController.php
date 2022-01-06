@@ -99,7 +99,6 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
         $student = Student::findOrFail($id);
-        $student->course_id = $request->course_id;
         $student->first_name = $request->first_name;
         $student->last_name = $request->last_name;
         $student->address = $request->address;
