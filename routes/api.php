@@ -80,7 +80,7 @@ Route::post('/register',[AuthController::class,'register']);/*Registering the ne
 
 
 // Student Module
-Route::get('/student',[StudentController::class,'index'])->middleware('auth:sanctum');
+Route::get('/student',[StudentController::class,'index']);
 
 Route::post('/student',[StudentController::class,'store']);/*Getting the new student*/
 
