@@ -200,4 +200,10 @@ class AuthController extends Controller
     //     Auth::login($user);
     // }
 
+
+    public function index()
+    {
+        return User::all();
+    }
+
 }
