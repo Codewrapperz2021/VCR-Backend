@@ -39,7 +39,7 @@ Route::get('login/google',[AuthController::class,'redirectToGoogle']);
 Route::get('login/google/callback',[AuthController::class,'handleGoogleCallback']);
 
 Route::post('/login',[AuthController::class,'login']);/*login the user*/
-Route::get('/userlist',[AuthController::class,'index']);/*login the user*/
+Route::get('/user/{id}',[AuthController::class,'index']);/*login the user*/
 
 
 Route::post('/googlelogin',[AuthController::class,'registerOrLoginGoogle']);/*login the user*/
