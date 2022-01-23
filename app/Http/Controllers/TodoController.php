@@ -41,6 +41,7 @@ class TodoController extends Controller
             ]);
             $todo = new Todo();
             $todo->noteslist = $request->noteslist;
+            $todo->user_id = $request->user_id;
             $todo->save();
         }
     }
@@ -78,6 +79,7 @@ class TodoController extends Controller
     {
         $todo = Todo::findOrFail($id);
         $todo->noteslist = $request->noteslist;
+        $todo->user_id = $request->user_id;
         $todo->save();
     }
 

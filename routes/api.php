@@ -39,10 +39,10 @@ Route::get('login/google',[AuthController::class,'redirectToGoogle']);
 Route::get('login/google/callback',[AuthController::class,'handleGoogleCallback']);
 
 Route::post('/login',[AuthController::class,'login']);/*login the user*/
-Route::get('/user/{id}',[AuthController::class,'index']);/*login the user*/
+Route::get('/user/{id}',[AuthController::class,'index']);/*get user id details*/
 
 
-Route::post('/googlelogin',[AuthController::class,'registerOrLoginGoogle']);/*login the user*/
+Route::post('/googlelogin',[AuthController::class,'registerOrLoginGoogle']);/*login the user by google*/
 
 
 // // Gooogle Login
@@ -80,9 +80,9 @@ Route::post('/register',[AuthController::class,'register']);/*Registering the ne
 
 
 // Student Module
-Route::get('/student',[StudentController::class,'index']);
+Route::get('/student',[StudentController::class,'index']);/*Show all students*/
 
-Route::post('/student',[StudentController::class,'store']);/*Getting the new student*/
+Route::post('/student',[StudentController::class,'store']);/*Adding the new student*/
 
 Route::get('/student/{id}',[StudentController::class,'show']);/*Fetching Single Student*/
 
@@ -99,17 +99,17 @@ Route::get('student-export-csv',[StudentController::class,'exportIntoCSV']);/*Ex
 
 //question
 
-Route::get('/question',[QuestionController::class,'index']);/*Show all students*/
+Route::get('/question',[QuestionController::class,'index']);/*Show all questions*/
 
-Route::post('/question',[QuestionController::class,'store']);/*Getting the new student*/
+Route::post('/question',[QuestionController::class,'store']);/*Adding the new question*/
 
-Route::get('/question/{id}',[QuestionController::class,'show']);/*Fetching Single Student*/
+Route::get('/question/{id}',[QuestionController::class,'show']);/*Fetching Single question*/
 
-Route::put('/question/{id}',[QuestionController::class,'update']);/*Updating Student Details*/
+Route::put('/question/{id}',[QuestionController::class,'update']);/*Updating question */
 
-Route::delete('/question/{id}',[QuestionController::class,'destroy']);/*Deleting Student*/
+Route::delete('/question/{id}',[QuestionController::class,'destroy']);/*Deleting question*/
 
-Route::get('/question/search/{first_name}',[QuestionController::class,'search']);/*Search Student*/
+Route::get('/question/search/{first_name}',[QuestionController::class,'search']);/*Search question*/
 
 Route::get('/innerjoin',[QuestionController::class,'innerJoin'])->name('question.innerjoin');
 
@@ -125,14 +125,16 @@ Route::get('/subject/{id}',[SubjectController::class,'show']);/*Fetching Single 
 
 Route::put('/subject/{id}',[SubjectController::class,'update']);/*Updating subject Details*/
 
-Route::delete('/subject/{id}',[SubjectController::class,'destroy']);/*Deleting subLecture
+Route::delete('/subject/{id}',[SubjectController::class,'destroy']);/*Deleting subLecture */
+
 Route::get('/subject/search/{name}',[SubjectController::class,'search']);/*Search subject*/
 
 
 //  Course Module
+
 Route::get('/course',[CourseController::class,'index']);/*Show all course*/
 
-Route::post('/course',[CourseController::class,'store']);/*Getting the new student*/
+Route::post('/course',[CourseController::class,'store']);/*Adding the new student*/
 
 Route::get('/course/{id}',[CourseController::class,'show']);/*Fetching Single course*/
 
@@ -144,7 +146,8 @@ Route::get('/course/search/{first_name}',[CourseController::class,'search']);/*S
 
 
  //Faculty Module
- Route::get('/faculty',[FacultyController::class,'index']);/*Show all Faculty*/
+
+Route::get('/faculty',[FacultyController::class,'index']);/*Show all Faculty*/
 
 Route::get('/faculty/{id}',[FacultyController::class,'show']);/*Fetching Single Faculty */
 
@@ -159,6 +162,7 @@ Route::get('/faculty/search/{first_name}',[FacultyController::class,'search']);/
 Route::get('faculty-export-excel',[FacultyController::class,'exportIntoExcel']);/*Export  in excel*/
 
 //Lecture Module
+
 Route::get('/lecture',[LectureController::class,'index']);/*Show all Lecture*/
 
 Route::get('/lecture/{id}',[LectureController::class,'show']);/*Fetching Single Lecture */
@@ -172,7 +176,8 @@ Route::post('lecture',[LectureController::class,'store']);/*Adding the new Lectu
 Route::get('/lecture/search/{first_name}',[LectureController::class,'search']);/*Search Lecture */
 
 
-//Lecture Module
+//Day Module
+
 Route::get('/day',[DayController::class,'index']);/*Show all Day*/
 
 Route::get('/day/{id}',[DayController::class,'show']);/*Fetching Single Day */
@@ -187,6 +192,7 @@ Route::get('/day/search/{first_name}',[DayController::class,'search']);/*Search 
 
 
 //Timetable Module
+
 Route::get('/timetable',[TimetableController::class,'index']);/*Show all Timetable*/
 
 Route::get('/timetable/{id}',[TimetableController::class,'show']);/*Fetching Single Timetable */
@@ -201,34 +207,37 @@ Route::get('/timetable/search/{first_name}',[TimetableController::class,'search'
 
 
 //correctanswer
-Route::get('/correctanswer',[CorrectanswerController::class,'index']);/*Show all students*/
 
-Route::post('/correctanswer',[CorrectanswerController::class,'store']);/*Getting the new student*/
+Route::get('/correctanswer',[CorrectanswerController::class,'index']);/*Show all correctanswers*/
 
-Route::get('/correctanswer/{id}',[CorrectanswerController::class,'show']);/*Fetching Single Student*/
+Route::post('/correctanswer',[CorrectanswerController::class,'store']);/*Getting the new correctanswer*/
 
-Route::put('/correctanswer/{id}',[CorrectanswerController::class,'update']);/*Updating Student Details*/
+Route::get('/correctanswer/{id}',[CorrectanswerController::class,'show']);/*Fetching Single correctanswer*/
 
-Route::delete('/correctanswer/{id}',[CorrectanswerController::class,'destroy']);/*Deleting Student*/
+Route::put('/correctanswer/{id}',[CorrectanswerController::class,'update']);/*Updating correctanswer Details*/
 
-Route::get('/correctanswer/search/{first_name}',[CorrectanswerController::class,'search']);/*Search Student*/
+Route::delete('/correctanswer/{id}',[CorrectanswerController::class,'destroy']);/*Deleting correctanswer*/
+
+Route::get('/correctanswer/search/{first_name}',[CorrectanswerController::class,'search']);/*Search correctanswer*/
 
 
 //assessment
-Route::get('/assessment',[AssessmentController::class,'index']);/*Show all students*/
 
-Route::post('/assessment',[AssessmentController::class,'store']);/*Getting the new student*/
+Route::get('/assessment',[AssessmentController::class,'index']);/*Show all assessments*/
 
-Route::get('/assessment/{id}',[AssessmentController::class,'show']);/*Fetching Single Student*/
+Route::post('/assessment',[AssessmentController::class,'store']);/*Getting the new assessment*/
 
-Route::put('/assessment/{id}',[AssessmentController::class,'update']);/*Updating Student Details*/
+Route::get('/assessment/{id}',[AssessmentController::class,'show']);/*Fetching Single assessment*/
 
-Route::delete('/assessment/{id}',[AssessmentController::class,'destroy']);/*Deleting Student*/
+Route::put('/assessment/{id}',[AssessmentController::class,'update']);/*Updating assessment Details*/
 
-Route::get('/assessment/search/{first_name}',[AssessmentController::class,'search']);/*Search Student*/
+Route::delete('/assessment/{id}',[AssessmentController::class,'destroy']);/*Deleting assessment*/
+
+Route::get('/assessment/search/{first_name}',[AssessmentController::class,'search']);/*Search assessment*/
 
 
 //Student_Assessment
+
 Route::get('/student-assessment',[StudentAssessmentController::class,'index']);/*Show all Student-assessment*/
 
 Route::get('/student-assessment/{id}',[StudentAssessmentController::class,'show']);/*Fetching Single Student-assessment */
@@ -254,6 +263,7 @@ Route::post('/profile/profileimage-update',[ProfileController::class,'update_pro
 
 
 //material 
+
 Route::post('/material',[MaterialController::class,'store']);/*Adding the new material*/
 
 Route::get('/material',[MaterialController::class,'index']);/*get material*/
@@ -264,6 +274,7 @@ Route::delete('/material/{id}',[MaterialController::class,'destroy']);/*Deleting
 
 
 //todo list
+
 Route::get('/todo',[TodoController::class,'index']);/*Show all todo*/
 
 Route::post('/todo',[TodoController::class,'store']);/*Getting the new todo*/

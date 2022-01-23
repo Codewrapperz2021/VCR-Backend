@@ -6,6 +6,10 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8000:8000
+
+
+# .......................
+
     # depends_on:
     #   - virtualclassroom_db  
   # virtualclassroom_db:
